@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from "react";
-import API from "../utils/API";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer"
 import styled from "styled-components";
 import empContext from "../utils/empContext";
+import API from '../utils/API';
+import EmployeeDetail from './EmployeeDetail';
 
 const Layout = styled.div`
     display: grid;
@@ -13,18 +14,26 @@ const Layout = styled.div`
 `;
 
 const EmployeeContainer = () => {
-    const [result, setResult] = useState({});
+    const [results, setResults] = useState([]);
     const [search, setSearch] = useState("");
 
+    useEffect(()=> {
+      API.getRandomPeople().then(ppl => {
+            setResults(ppl.data.results)
+      })
+    },[]
+    )
     const searchEmployees = async (query) => {
         try {
           const res = await API.search(query);
           console.log("EmployeeContainer -> res", res.data);
-          setResult(res.data);
+          setResults(res.data);
         } catch (error) {
-          console.log("You fucked up!");
+          console.log("You messed up!");
         }
       };
+
+    // const EmployeeDetail = 
     
 
     const handleInputChange = (event) => {
@@ -38,21 +47,22 @@ const EmployeeContainer = () => {
       };
 
     return (
-        <empContext.Provider
-        value={{
-            search,
-            result,
-            handleInputChange,
-            handleFormSubmit,
-        }}
-        >
+        // <empContext.Provider
+        // value={{
+        //     search,
+        //     results,
+        //     handleInputChange,
+        //     handleFormSubmit,
+        // }}
+        // >
+        
             <Layout>
                 <Header />
-                {/* <Main>
-                    <EmployeeDetails />
-                </Main> */}
+                <Main>
+                    <EmployeeDetail results={results} />
+                </Main>
             </Layout>
-        </empContext.Provider>
+       
     );
 };
 
