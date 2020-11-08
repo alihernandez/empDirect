@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const StyledSearchForm = styled.form`
     display: flex;
+    align-self: center;
     border: 1px solid #333333;
     padding: 10px;
     margin-top: 20px;
@@ -32,7 +33,7 @@ const StyledSearchForm = styled.form`
 `;
 
 const SearchForm = () => {
-    const {search, handleInputChange, handleFormSubmit} = useContext(MovieContext);
+    const {search, handleInputChange, handleFormSubmit} = useContext(empContext);
 
     return (
         <StyledSearchForm>

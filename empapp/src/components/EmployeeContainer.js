@@ -7,6 +7,8 @@ import empContext from "../utils/empContext";
 import API from '../utils/API';
 import EmployeeDetail from './EmployeeDetail';
 
+
+
 const Layout = styled.div`
     display: grid;
     height: 100vh;
@@ -32,8 +34,6 @@ const EmployeeContainer = () => {
           console.log("You messed up!");
         }
       };
-
-    // const EmployeeDetail = 
     
 
     const handleInputChange = (event) => {

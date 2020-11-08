@@ -8,7 +8,7 @@ const StyledHeader = styled.div `
     height: 100px;
     padding: 20px;
     h1{
-        color: white;
+        color: grey;
         &:hover {
             color: red;
         }

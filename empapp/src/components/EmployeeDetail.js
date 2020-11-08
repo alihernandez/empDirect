@@ -2,10 +2,11 @@ import React, { useContext } from "react";
 import empContext from "../utils/empContext";
 import styled from "styled-components";
 import moment from 'moment'
+import SearchForm from '../components/EmployeeSearch'
 const StyledEmployeeDetail = styled.div`
   display: flex;
-  justify-content: right;
-  align-items: right;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 `;
 
@@ -18,10 +19,11 @@ const EmployeeDetail = (props) => {
     <StyledEmployeeDetail>
       {console.log(props.results)}
       <div className="card">
-        <table class="table">
+      <SearchForm />
+        <table className="table">
           <thead>
             <tr>
-              <th scope="col">picture</th>
+              <th scope="col">ID Pic</th>
               <th scope="col">First</th>
               <th scope="col">Last</th>
               <th scope="col">Email</th>
@@ -42,19 +44,13 @@ const EmployeeDetail = (props) => {
                       <td>{employee.phone}</td>
                       <td>{moment(employee.dob.date, "YYYY-MM-DD").format("MM-DD-YYYY")}</td>
                     </tr>
-
-                    {/* <h3>Name:{employee.name.first + " " + employee.name.last}</h3>
-                <h3>Email:{employee.email}</h3>
-                <h3>DOB:{employee.dob.date}</h3>
-                <h3>Phone:{employee.phone}</h3>
-                <img src= {employee.picture.thumbnail}/> */}
                   </>
                 );
               })
             ) : (
               <h3>No Results to Display</h3>
             )}
-            {/* <EmployeeForm /> */}
+            
           </tbody>
         </table>
       </div>
