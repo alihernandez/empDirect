@@ -17,35 +17,34 @@ const Layout = styled.div`
 
 const EmployeeContainer = () => {
     const [results, setResults] = useState([]);
+    const [original, setOriginal] = useState([]);
     const [search, setSearch] = useState("");
 
     useEffect(()=> {
       API.getRandomPeople().then(ppl => {
             setResults(ppl.data.results)
+            setOriginal(ppl.data.results);
       })
     },[]
     )
-    const searchEmployees = async (query) => {
-        try {
-          const res = await API.search(query);
-          console.log("EmployeeContainer -> res", res.data);
-          setResults(res.data);
-        } catch (error) {
-          console.log("You messed up!");
-        }
-      };
-    
-
     const handleInputChange = (event) => {
         const { value } = event.target;
         setSearch(value);
+        console.log(value);
+        let newResults = original.filter(employee => {
+          return employee.name.first.toLowerCase().includes(value.toLowerCase()) ||  employee.name.last.toLowerCase().includes(value.toLowerCase())
+        })
+        setResults(newResults)
       };
     
-      const handleFormSubmit = (event) => {
-        event.preventDefault();
-        searchEmployees(search);
-      };
+   const handleOnClick = (column) => {
+          let newResults = results.sort((a,b) => {
+            return a.name[column].localeCompare(b.name[column])
+          })
+        alert("click")
+          setResults(newResults)
 
+   }
     return (
         // <empContext.Provider
         // value={{
@@ -59,7 +58,7 @@ const EmployeeContainer = () => {
             <Layout>
                 <Header />
                 <Main>
-                    <EmployeeDetail results={results} />
+                    <EmployeeDetail results={results} handleInputChange= {handleInputChange} search = {search} handleOnClick = {handleOnClick} />
                 </Main>
             </Layout>
        

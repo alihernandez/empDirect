@@ -19,36 +19,48 @@ const EmployeeDetail = (props) => {
     <StyledEmployeeDetail>
       {console.log(props.results)}
       <div className="card">
-      <SearchForm />
+      <SearchForm handleInputChange = {props.handleInputChange} search = {props.search}/>
         <table className="table">
           <thead>
             <tr>
               <th scope="col">ID Pic</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
+              <th   onClick={ () => {
+                      props.handleOnClick("first")
+                  }}>First</th>
+              <th    onClick={ () => {
+                      props.handleOnClick("last")
+                  }}>Last</th>
               <th scope="col">Email</th>
               <th scope="col">Phone</th>
               <th scope="col">DOB</th>
             </tr>
           </thead>
           <tbody>
+              {console.log(props.results)}
             {props.results.length > 0 ? (
-              props.results.map((employee) => {
+              props.results.map((employee, index)=> {
                 return (
-                  <>
-                    <tr>
-                      <th scope="row"><img src= {employee.picture.thumbnail}/></th>
+                    
+                    <tr key = {index}>
+                      <td><img src= {employee.picture.thumbnail}/></td>
                       <td>{employee.name.first}</td>
                       <td>{employee.name.last}</td>
                       <td>{employee.email}</td>
                       <td>{employee.phone}</td>
                       <td>{moment(employee.dob.date, "YYYY-MM-DD").format("MM-DD-YYYY")}</td>
                     </tr>
-                  </>
+                  
                 );
               })
             ) : (
-              <h3>No Results to Display</h3>
+                <tr >
+                      <td> </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
             )}
             
           </tbody>

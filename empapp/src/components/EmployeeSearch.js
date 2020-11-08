@@ -32,23 +32,23 @@ const StyledSearchForm = styled.form`
     }
 `;
 
-const SearchForm = () => {
-    const {search, handleInputChange, handleFormSubmit} = useContext(empContext);
+const SearchForm = (props) => {
+    
 
     return (
         <StyledSearchForm>
             <div className= "form-group">
             <label htmlFor="search">Search:</label>
             <input
-            value={search}
+            value={props.search}
             name= "search"
             type= "text"
             placeholder= "Search for an Employee"
             id= "search"
-            onChange={handleInputChange}
+            onChange={props.handleInputChange}
             />
             <br />
-            <button onClick ={handleFormSubmit}>Search</button>
+            {/* <button onClick ={handleFormSubmit}>Search</button> */}
             </div>
         </StyledSearchForm>
     )
